@@ -7,3 +7,7 @@ data:
     entryPoints:
       web:
         address: ":80"
+      web-secure:
+        address: ":443"
+    providers:
+      kubernetesIngress: {}
