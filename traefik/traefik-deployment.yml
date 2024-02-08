@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traefik
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: traefik
+  template:
+    metadata:
+      labels:
+        app: traefik
+    spec:
+      serviceAccountName: traefik
+      containers:
+      - name: traefik
+        image: traefik:v2.5
+        args:
+        - --providers.kubernetescrd=true
+        - --entrypoints.web.address=:80
+        ports:
+        - name: web
+          containerPort: 80
+        volumeMounts:
+        - name: traefik-config
+          mountPath: /etc/traefik
+      volumes:
+      - name: traefik-config
+        configMap:
+          name: traefik-config
