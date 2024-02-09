@@ -1,6 +1,8 @@
-# DevOps Technical Test
+# Kubernetes Cluster Test
 
-This repo contains the steps and commands followed to build the cluster and its configuration.
+This repo contains a Kubernetes cluster and configuration procedure.
+
+The main goal is to achieve a configuration based on the specified tasks below.
 
 Relevant sources are listed at the bottom. 
 
