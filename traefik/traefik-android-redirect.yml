@@ -6,8 +6,6 @@ spec:
   headers:
     customRequestHeaders:
       User-Agent: "*.Android.*"
-    customResponseHeaders:
-      Location: "http://apache-service/"
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
