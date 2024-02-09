@@ -1,6 +1,6 @@
 # Kubernetes Cluster Test
 
-This repo contains a Kubernetes cluster and configuration procedure.
+This repo contains a series of configuration files for Kubernetes, as well as a cluster creation and configuration procedure.
 
 The main goal is to achieve a configuration based on the specified tasks below.
 
