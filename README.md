@@ -1,6 +1,7 @@
 # DevOps Technical Test
 
 This repo explains the steps and commands followed to build the cluster and its configuration.
+
 Relevant sources are listed at the bottom. 
 
 ## Tasks
@@ -24,7 +25,7 @@ kind create cluster
 
 Deploy Apache:
 ```
-kubectl apply -f apache/apache-deployment.yml
+kubectl create -f ./apache/apache-deployment.yml
 ```
 
 Expose deployment in order to access Apache:
@@ -36,7 +37,7 @@ kubectl expose deployment/apache
 
 Deploy NGINX:
 ```
-kubectl apply -f nginx/nginx-deployment.yml
+kubectl create -f ./nginx/nginx-deployment.yml
 ```
 
 Expose deployment in order to access NGINX:
@@ -57,17 +58,17 @@ helm install traefik traefik/traefik
 
 Enable Kubernetes provider and define entrypoints:
 ```
-kubectl apply -f traefik/traefik-config-map.yml
+kubectl apply -f ./traefik/traefik-config-map.yml
 ```
 
 Set up Ingress:
 ```
-kubectl apply -f traefik/traefik-ingress.yml
+kubectl apply -f ./traefik/traefik-ingress.yml
 ```
 
 Set up redirect for Android requests:
 ```
-kubectl apply -f traefik/traefik-android-redirect.yml
+kubectl apply -f ./traefik/traefik-android-redirect.yml
 ```
 
 ### 6. HPA for NGINX
@@ -75,7 +76,7 @@ kubectl apply -f traefik/traefik-android-redirect.yml
 This targets the NGINX deployment CPU usage. Note that `nginx-deployment.yml` has the CPU resource request set.
 Parameters are set on the `nginx-hpa.yml` config file, apply directly:
 ```
-kubectl apply -f nginx/nginx-hpa.yml
+kubectl apply -f ./nginx/nginx-hpa.yml
 ```
 
 ### 7. Cert-manager installation
@@ -91,12 +92,10 @@ A cluster-wide issuer provides certificates when interacting with the previously
 Note that e-mail and issuer account have been made up for this example.
 Apply directly:
 ```
-kubectl apply -f cert-manager/cert-manager-cluster-issuer.yml
+kubectl apply -f ./cert-manager/cert-manager-cluster-issuer.yml
 ```
 
 > **Note**: This command may throw out an error about cert-manager's webhook. This is because the Kubernetes API needs to trust the webhook's certificate. Waiting a few seconds and retrying the command should be enough for a correct creation.
-
-
 
 ## Sources
 
