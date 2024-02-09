@@ -1,10 +1,11 @@
 # DevOps Technical Test
 
-This repo explains the steps and commands followed to build the cluster and its configuration.
+This repo contains the steps and commands followed to build the cluster and its configuration.
 
 Relevant sources are listed at the bottom. 
 
 ## Tasks
+
 - Set up a Kubernetes cluster using any preferred platform (e.g., Kind, Minikube, etc.).
 - Configure Traefik as the ingress controller to manage access to services within the cluster.
 - Deploy an Apache server to serve requests for mobile users.
@@ -18,7 +19,7 @@ Relevant sources are listed at the bottom.
 
 In this case I used Kind to run local Kubernetes, creating a cluster in Docker:
 ```
-kind create cluster
+kind create cluster --name devops-test
 ```
 
 ### 2. Apache configuration
@@ -53,6 +54,8 @@ helm repo add traefik https://traefik.github.io/charts
 helm repo update
 helm install traefik traefik/traefik
 ```
+
+> On Windows, Helm might fail saying `Access is Denied`. This is because it runs on the AppData folder and therefore needs admin privileges when executing the command.
 
 ### 5. Traefik configuration
 
@@ -95,7 +98,7 @@ Apply directly:
 kubectl apply -f ./cert-manager/cert-manager-cluster-issuer.yml
 ```
 
-> **Note**: This command may throw out an error about cert-manager's webhook. This is because the Kubernetes API needs to trust the webhook's certificate. Waiting a few seconds and retrying the command should be enough for a correct creation.
+> This command may throw out an error about cert-manager's webhook. This is because the Kubernetes API needs to trust the webhook's certificate. Waiting a few seconds and retrying the command should be enough for a correct creation.
 
 ## Sources
 
