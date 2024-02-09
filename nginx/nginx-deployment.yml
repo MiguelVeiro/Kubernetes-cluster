@@ -18,5 +18,6 @@ spec:
         ports:
         - containerPort: 80
         resources:
+          # CPU requests for HPA
           requests:
             cpu: "250m"
