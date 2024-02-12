@@ -1,13 +1,4 @@
 apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: android-redirect
-spec:
-  headers:
-    customRequestHeaders:
-      User-Agent: "*.Android.*"
----
-apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: android-redirect
@@ -17,11 +8,15 @@ spec:
     - web
     - web-secure
   routes:
-    - match: Host(`ejemplo.marosa.vat`) && PathPrefix(`/`)
+    # Redirect Android users to Apache
+    - match: Host(`ejemplo.marosa.vat`) && Headers(`User-Agent`, `android`)
       kind: Rule
-      middlewares:
-        - name: android-redirect
       services:
-        # Redirect to Apache
         - name: apache
+          port: 80
+    # Redirect other users to NGINX
+    - match: Host(`ejemplo.marosa.vat`) && HeadersRegexp(`User-Agent`, `^(?!.*android).*`)
+      kind: Rule
+      services:
+        - name: nginx
           port: 80
