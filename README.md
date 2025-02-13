@@ -6,7 +6,7 @@ The main goal is to achieve a configuration based on the specified tasks below.
 
 Relevant sources are listed at the bottom. 
 
-## Tasks
+## Goals
 
 - Set up a Kubernetes cluster using any preferred platform (e.g., Kind, Minikube, etc.).
 - Configure Traefik as the ingress controller to manage access to services within the cluster.
